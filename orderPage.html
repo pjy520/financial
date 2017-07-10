@@ -1,0 +1,315 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<style>
+			body{
+				font-family: "微软雅黑";
+			}
+			.b-b-1{
+				border-style:solid;
+				border-width: 0 0 1px 0;
+			}
+			.tcenter{
+				text-align: center;
+			}
+			
+			.mui-bar-nav~.mui-content{
+				padding-top: 46px;
+			}
+			.i-content{
+				margin-top: 420px;
+			}
+			.fl{
+				float: left;
+			}
+			.fr{
+				float: right;
+			}
+			.clearfix::after, .clearfix::before{
+				content:'';
+				display: block;
+				clear: both;
+			}
+			.clearfix{
+				zoom: 1;
+			}
+			.box > div{
+				display: flex;
+				/*justify-content: space-between;*/
+				padding: 10px;
+			}
+			.box > div >div{
+				text-align: left;
+				flex: 1;
+			}
+			.box > div > div > span{
+				font-size: 16px;
+			}
+			.mui-fullscreen .mui-segmented-control~.mui-slider-group{
+				height: 360px!important;
+			}
+			.clear{
+				padding: 10px;
+			}
+			.floatLoss{
+				font-size: 16px;
+			}
+			.text{
+				font-size: 12px;
+				color: gray;
+			}
+			.price{
+				color: red;
+			}
+			.name{
+				font-size: 16px;
+				color: gray;
+			}
+			.mui-content{
+				background-color: #fff;
+			}
+			.change{
+				position: fixed;
+				bottom: 0;
+				background-color: #FFF;
+				width: 100%;
+				height: 80px;
+				text-align: center;
+			}
+			.stopLoss, .closeOut{
+				width: 100px;
+				height: 40px;
+				border-radius: 5px;
+				background-color: #FED000;
+				display: inline-block;
+				line-height: 40px;
+				text-align: center;
+				margin-top: 20px;
+			}
+			.mui-content{
+				margin-bottom: 80px;
+			}
+		</style>
+	</head>
+		
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">欧元/美元</h1>
+		</header>
+		<div class = "mui-content" >
+					<div id="slider" class="mui-slider mui-fullscreen clearfix"  style = "height: 400px;">
+						<div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+							<div class="mui-scroll">
+								<a class="mui-control-item mui-active" href="#item1mobile">
+									1分
+								</a>
+								<a class="mui-control-item" href="#item2mobile">
+									3分
+								</a>
+								<a class="mui-control-item" href="#item3mobile">
+									5分
+								</a>
+								<a class="mui-control-item" href="#item4mobile">
+									1日
+								</a>
+								<a class = "mui-control-item" href = "#item5mobile">
+									1月
+								</a>
+								<a class = "mui-control-item" href="#item6mobile">
+									1年
+								</a>
+							</div>
+						</div>
+						<div class="mui-slider-group">
+							<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+								<div style = "width:100%;height:360px;" id = "Min01">
+									
+								</div>
+							</div>
+							<div id="item2mobile" class="mui-slider-item mui-control-content">
+								3分线
+								
+							</div>
+							<div id="item3mobile" class="mui-slider-item mui-control-content ">
+								5分线
+							
+							</div>
+							<div id="item4mobile" class="mui-slider-item mui-control-content">
+								1日线
+							</div>
+							<div id="item5mobile" class="mui-slider-item mui-control-content">
+								1月线
+							</div>
+							<div id="item5mobile" class="mui-slider-item mui-control-content">
+								1年线
+							</div>
+						</div>
+					</div>
+					<div class='i-content'>
+						<div class='clearfix clear'>
+							<div class='fl'>
+								<div class='floatLoss'>浮动盈亏</div>
+								<div class='text'>(包含手续费，库存费)</div>
+							</div>
+							<div class='price fr'>$8.40</div>
+						</div>
+						<div class='box'>
+							<div>
+								<div>
+									<span class='name'>订单号</span>
+									<span class='orderNum'>39362649</span>
+								</div>
+								<div>
+									<span class='name'>买入时间</span>
+									<span class='buyTime'>06-27 13:32</span>
+								</div>
+							</div>
+							<div>
+								<div>
+									<span class='name'>买入价格</span>
+									<span class='buyPrice'>1245.27</span>
+								</div>
+								<div>
+									<span class='name'>现在价格</span>
+									<span class='nowPrice'>1245.50</span>
+								</div>
+							</div>
+							<div>
+								<div>
+									<span class='name'>交易手数</span>
+									<span class='tradNum'>0.20</span>
+								</div>
+								<div>
+									<span class='name'>交易金额</span>
+									<span class='tradPrice'>$100.00</span>
+								</div>
+							</div>
+							<div>
+								<div>
+									<span class='name'>止损价格</span>
+									<span class='stopDown'>1245.50</span>								
+								</div>
+								<div>
+									<span class='name'>止盈价格</span>
+									<span class='stopUp'>1245.50</span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+		</div>
+					<div class='change'>
+						<div class='stopLoss'>止盈/止损</div>
+						<div class='closeOut'>平仓</div>
+					</div>
+
+					
+
+		<script src="js/mui.min.js"></script>
+		<script src = "js/echarts.js"></script>
+		<script src="js/util.js"></script>
+		<script type="text/javascript">
+			mui.init()
+			
+			var min01 = document.getElementById("Min01");
+			var min01chart = echarts.init(min01);
+			min01chart.setOption({
+				tooltip:{
+					trigger:'axis',
+					axisPointer:{
+						animation: false,
+			            type: 'cross',
+			            lineStyle: {
+			                color: '#376df4',
+			                width: 2,
+			                opacity: 1
+			            }
+					}
+				},
+				xAxis:{
+					type:'category',
+					data:[],
+					axisLine: { lineStyle: { color: '#8392A5' } }
+				},
+				yAxis: {
+					scale: true
+				},
+				dataZoom: [{
+			        textStyle: {
+			            color: '#8392A5'
+			        },
+			        handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
+			        handleSize: '60%',
+			        dataBackground: {
+			            areaStyle: {
+			                color: '#8392A5'
+			            },
+			            lineStyle: {
+			                opacity: 0.8,
+			                color: '#8392A5'
+			            }
+			        },
+			        handleStyle: {
+			            color: '#fff',
+			            shadowBlur: 3,
+			            shadowColor: 'rgba(0, 0, 0, 0.6)',
+			            shadowOffsetX: 2,
+			            shadowOffsetY: 2
+			        }
+			    }, {
+			        type: 'inside'
+			    }],
+				animation:false,
+				series:[
+					{
+						type:'candlestick',
+						name:'',
+						data:[],
+						itemStyle: {
+			                normal: {
+			                    color: null,
+			                    color0: null,
+			                    borderColor: null,
+			                    borderColor0: '#0CD484'
+			                }
+			            }
+					}
+				]
+			});
+			mui.plusReady(function(){
+				console.log("plus ready");
+				timer_min01 = setInterval("flushMin01()",500);
+				document.getElementsByClassName('stopLoss')[0].addEventListener('tap', function(){
+					mui.openWindow({
+						url: 'change.html',
+						id : 'change.html'
+					})
+				})
+			});
+			function flushMin01(){
+				get_f_data("EUR","Min01",60,function(result){
+					min01chart.setOption({
+						xAxis:{
+							data:result.date
+						},
+						series:[{
+							name:'',
+							data:result.prices
+						}]
+					});
+				},function(err){
+					mui.toast("请求发生错误");
+				});
+			};
+			
+			
+		</script>
+	</body>
+
+</html>

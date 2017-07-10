@@ -1,0 +1,119 @@
+{
+  "tab-webview-subpage-contact.html": {
+    "href": "tab-webview-subpage-contact.html",
+    "resources": [
+      "css/mui.min.css",
+      "js/mui.min.js"
+    ],
+    "refer": [],
+    "priority": 0
+  },
+  "tab-webview-subpage-about.html": {
+    "href": "tab-webview-subpage-about.html",
+    "resources": [
+      "js/mui.min.js",
+      "css/mui.min.css"
+    ],
+    "refer": [],
+    "priority": 0
+  },
+  "forget_password.html": {
+    "href": "forget_password.html",
+    "resources": [
+      "css/mui.min.css",
+      "css/style.css",
+      "js/mui.min.js",
+      "js/app.js"
+    ],
+    "refer": [],
+    "priority": 0
+  },
+  "main.html": {
+    "href": "main.html",
+    "resources": [
+      "css/mui.min.css",
+      "js/mui.min.js",
+      "js/app.js"
+    ],
+    "refer": [],
+    "priority": 0
+  },
+  "unlock.html": {
+    "href": "unlock.html",
+    "resources": [
+      "css/mui.min.css",
+      "js/mui.min.js",
+      "js/mui.locker.js",
+      "js/app.js"
+    ],
+    "refer": [
+      "login.html",
+      "main.html"
+    ],
+    "priority": 0
+  },
+  "reg.html": {
+    "href": "reg.html",
+    "resources": [
+      "css/mui.min.css",
+      "css/style.css",
+      "js/mui.min.js",
+      "js/app.js"
+    ],
+    "refer": [
+      "login.html"
+    ],
+    "priority": 0
+  },
+  "login.html": {
+    "href": "login.html",
+    "resources": [
+      "css/mui.min.css",
+      "js/mui.min.js",
+      "js/mui.enterfocus.js",
+      "js/app.js"
+    ],
+    "refer": [
+      "forget_password.html",
+      "main.html",
+      "unlock.html",
+      "reg.html"
+    ],
+    "priority": 0
+  },
+  "tab-webview-subpage-setting.html": {
+    "href": "tab-webview-subpage-setting.html",
+    "resources": [
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "images/login.png"
+    ],
+    "refer": [
+      "login.html"
+    ],
+    "priority": 0
+  },
+  "tab-webview-subpage-chat.html": {
+    "href": "tab-webview-subpage-chat.html",
+    "resources": [
+      "css/mui.min.css",
+      "js/mui.min.js"
+    ],
+    "refer": [],
+    "priority": 0
+  },
+  "tab-webview-main.html": {
+    "href": "tab-webview-main.html",
+    "resources": [
+      "css/mui.min.css",
+      "js/mui.min.js"
+    ],
+    "refer": [
+      "tab-webview-subpage-contact.html",
+      "tab-webview-subpage-about.html",
+      "tab-webview-subpage-setting.html",
+      "tab-webview-subpage-chat.html"
+    ],
+    "priority": 0
+  }
+}

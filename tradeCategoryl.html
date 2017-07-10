@@ -1,0 +1,139 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/mui.indexedlist.css" />
+		<style>
+			html,
+			body {
+				height: 100%;
+				overflow: hidden;
+			}
+			.mui-bar {
+				-webkit-box-shadow: none;
+				box-shadow: none;
+			}
+			.join{
+				display: inline-block;
+				float: right;
+				z-index: 999;
+			}
+			.join > img{
+				width: 20px;
+			}
+			.breed{
+				display: inline-block;
+			}
+			.mui-table-view-cell.mui-active{
+				background-color: #fff;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">添加交易品种</h1>
+		</header>
+		<div class="mui-content">
+			<div id='list' class="mui-indexed-list">
+				<div class="mui-indexed-list-alert"></div>
+				<div class="mui-indexed-list-inner">
+					<div class="mui-indexed-list-empty-alert">没有数据</div>
+					<ul class="mui-table-view" id='goods'>
+						<!--<li data-group="A" class="mui-table-view-divider mui-indexed-list-group">A</li>-->
+						<!--<li data-value="AKU" data-tags="AKeSu" class="mui-table-view-cell mui-indexed-list-item">
+							<div class='breed'>
+								<span>USDJPY</span> <br />
+								<span>美元日元</span>
+							</div>
+							<div class='join'>
+								<img src="images/add.png" alt=""  style="width: 30px; margin-top: 5px;" />
+							</div>
+						</li>	-->
+					</ul>
+				</div>
+			</div>
+		</div>
+		
+		
+		
+		<script src="js/mui.min.js"></script>
+		<!--<script src="js/jquery.min.js"></script>-->
+		<!--<script src="js/mui.indexedlist.js"></script>-->
+		<script src="js/config.js"></script>
+		<script src="js/template.js"></script>
+		<script type='text/html' id='kind'>
+			{{each symbols as value i}}
+				<li class="mui-table-view-cell mui-indexed-list-item">
+					<div class='breed'>
+						<span>{{value.symbol}}</span>
+						<br/>
+						<span>{{value.name}}</span>
+					</div>
+					<div class='join' id='{{value.symbol}}'>
+						<img src="images/add.png" alt=""  style="width: 30px; margin-top: 5px;" />
+					</div>
+				</li>		
+			{{/each}}
+		</script>
+		<script type="text/javascript">
+			mui.init();
+			mui.ready(function() {
+				var header = document.querySelector('header.mui-bar');
+				var list = document.getElementById('list');
+				//calc hieght
+				list.style.height = (document.body.offsetHeight - header.offsetHeight) + 'px';
+				//create
+				
+				mui.ajax(symbols_url,
+					{
+						dataType: 'json',
+						type: 'get',
+						success: function(data){
+							var data = data.data;
+//							console.log(JSON.stringify(data));
+							var html = template('kind', data);
+							document.getElementById('goods').innerHTML = html;
+							mui('.join').each(function(i, v){
+								v.addEventListener('tap', function(){
+									var symbol = this.id;
+									var that = this;
+									mui.ajax(symbols_url,{
+										type: 'post',
+										dataType:'json',
+										data:{symbol:symbol, option:1},
+										success: function(data){
+											console.log(data);
+											console.log(1);
+											if(data.code == 2000) {
+												that.children[0].src  = 'images/right.png';
+//												localStorage.setItem('')		
+												mui.toast(data.msg);
+											}else{
+												mui.toast(data.msg)
+											}
+										}
+									})
+								})
+							})
+						}	
+					}				
+				)
+			
+			});
+			
+			
+			
+			
+			
+			
+			
+		</script>
+	</body>
+
+</html>

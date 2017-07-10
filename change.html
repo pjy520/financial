@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<style>
+			.stopProfit, .stopLoss{
+				text-align: center;
+				width: 80%;
+				margin: 10px auto 0;
+			}
+			
+			.stopProfit > div, .stopLoss > div{
+				display: inline-block;
+				vertical-align: middle;
+			}
+			
+			.mui-numbox{
+				width: 260px;
+				height: 40px;
+			
+			}
+			.price{
+				/*height: 120px;*/
+				text-align: center;
+				border-bottom: 1px solid lightgray;
+			}
+			.price > div {
+				display: inline-block;
+				margin: 50px 40px 20px ;
+			}
+			.mui-content{
+				background-color: #fff;
+			}
+			body{
+				background-color: #fff;
+			}
+			.stop{
+				padding: 50px 0 50px 0;
+				border-bottom: 1px solid lightgray;
+				
+			}
+			.name{
+				color: gray;
+			}
+			.mui-btn-warning{
+				width: 160px;
+				height: 40px;
+				margin-top: 50px;
+			}
+			.btn{
+				text-align: center;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">修改止盈止损</h1>
+		</header>
+		
+		<div class="mui-content">
+			<div class='price'>
+				<div>
+					<div class='name'>买入价格</div>
+					<div class='buyPrice'>1245.27</div>
+				</div>
+				<div>
+					<div class='name'>现在价格</div>
+					<div class='nowPrice'>1245.61</div>
+				</div>
+			</div>
+			
+			<div class="stop">
+				<div class='stopProfit'>
+					<div class='text'>止盈点数</div>
+					<div class="mui-numbox proftNum" data-numbox-step='1' data-numbox-min='1' data-numbox-max='99999'  style='z-index: 99999999;'>
+						<button class="mui-btn mui-btn-numbox-minus" type="button">-</button>
+						<input class="mui-input-numbox" type="number" value='224' />
+						<button class="mui-btn mui-btn-numbox-plus" type="button">+</button>
+					</div>
+				</div> 
+				<div class='stopLoss'>
+					<div class='text'>止损点数</div>
+					<div class="mui-numbox lossNum" data-numbox-step='1' data-numbox-min='1' data-numbox-max='99999'  style='z-index: 99999999;'>
+						<button class="mui-btn mui-btn-numbox-minus" type="button">-</button>
+						<input class="mui-input-numbox" type="number" value='233' />
+						<button class="mui-btn mui-btn-numbox-plus" type="button">+</button>
+					</div>
+				</div>				
+			</div>
+			
+			<div class='btn'>
+				<button type="button" class="mui-btn mui-btn-warning">确认修改</button>	
+			</div>
+			
+			
+		</div>
+		
+		
+		
+		
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+	</body>
+
+</html>

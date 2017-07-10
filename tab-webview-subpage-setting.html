@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="css/mui.min.css">
+		<style>
+			html,body {
+				background-color: #efeff4;
+				font-family: "微软雅黑";
+			}
+			
+			
+			.fl{
+				float: left;
+			}
+			.fr{
+				float: right;
+			}
+			.title{
+				margin: 20px 15px 10px;
+				color: #6d6d72;
+				font-size: 15px;
+			}
+			.nickName{
+				
+			}
+			a{
+				color: #313B54;	
+			}
+			.num{
+				float: right;
+				margin-right: 24px;
+				color: #BFC0C5;
+			}
+			a{
+				display: block;
+			}
+			
+			.login{
+				height: 160px;
+			}
+			
+			.loginA{
+				text-align: center;
+				height: 100%;				
+			}
+			.loginA img{
+				margin-top: 20px;
+			}
+			.clickLogin{
+				font-size: 16px;
+				font-weight: bold;
+				margin-top: 6px;
+			}
+			.mui-table-view-cell>a:not(.mui-btn){
+				margin: 0;
+			}
+			.mui-active{
+				background-color: #fff!important;
+			}
+
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <h1 class="mui-title" id='titleName'></h1>
+		</header>
+		<div class="mui-content">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell login">
+					<div>
+						<div>资产总额</div>
+						<div id='totalAssets'></div>
+					</div>
+					<!--<a href="" class='loginA' id='loginA'>
+						<img src="images/login.png" alt="" />
+						<div class='clickLogin'>点击登录/注册</div>
+					</a>-->
+				</li>
+			</ul>
+			
+			<ul class="mui-table-view list" style="margin-top: 25px;">
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">
+						充值提现
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">
+						邀请好友
+
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">
+						帮助中心
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a id="about" class="mui-navigate-right">
+						关于多空宝
+					</a>
+				</li>
+				
+				<li class="mui-table-view-cell">
+					<a id="about" class="mui-navigate-right">
+						联系客服
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a id="about" class="mui-navigate-right">
+						更多
+					</a>
+				</li>
+			</ul>
+		</div>
+		</style>
+	</body>
+	<script src="js/mui.min.js"></script>
+	<script>
+		mui.init({
+			swipeBack:true //启用右滑关闭功能
+		});
+		
+		mui.ready(function(){
+			var user = localStorage.getItem('user');
+			user = JSON.parse(user);
+			console.log(user);
+			console.log(2);
+			document.getElementById('titleName').innerHTML = user.username;
+			document.getElementById('totalAssets').innerHTML = user.profit;
+			
+		})
+		
+
+
+	</script>
+</html>

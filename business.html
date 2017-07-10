@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<style>
+			body{
+				font-family: "微软雅黑";
+				background-color: #fff;
+			}
+			
+			.mui-content{
+				background-color: #fff;
+			}
+			
+			.box > div, .float{
+				display: flex;
+				justify-content: space-between;
+			}
+			
+			.box > div {
+				/*flex: 1;*/
+				padding: 20px 10px;
+				color: gray;
+				border-bottom: 1px solid lightgray;
+				margin-left: 10px;
+			}
+			
+			.floatNum{
+				color: green;
+				font-size: 28px;
+			}
+			
+			.float{
+				padding: 20px 10px;
+			}
+			
+		</style>
+	</head>
+
+	
+	
+	<body>
+			<header class="mui-bar mui-bar-nav">
+			    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			    <h1 class="mui-title">交易成功</h1>
+			</header>
+			<div class="mui-content">
+				<div class="box">
+					<div>
+						<div class='name'>订单号</div>
+						<div id='orderid'></div>
+					</div>
+					<div>
+						<div class='name'>开仓价格</div>
+						<div id='price'></div>
+					</div>
+					<div>
+						<div class='name'>交易手数</div>
+						<div id='vol'></div>
+					</div>
+					<div>
+						<div class='name'>止损价格</div>
+						<div id='downPrice'></div>
+					</div>
+					<div>
+						<div class='name'>止盈价格</div>
+						<div id='upPrice'></div>
+					</div>
+					<div>
+						<div class='name'>买入时间</div>
+						<div id='date'></div>
+					</div>	
+				</div>
+			</div>
+			
+		
+		
+		
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+			mui.plusReady(function(){
+				var self = plus.webview.currentWebview();
+				
+				var orderid  = self.orderid;
+				var symbol = self.symbol;
+				var price = self.price;
+				var vol= self.vol;
+				
+				document.getElementById('orderid').innerHTML = orderid;
+				document.getElementById('price').innerHTML = price;
+				document.getElementById('vol').innerHTML = vol;
+//				document.getElementById('orderid') = orderid;
+			})
+			
+	 	</script>
+	</body>
+
+</html>

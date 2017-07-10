@@ -1,0 +1,358 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/deal.css" />
+
+		<style>
+			.b-b-1{
+				border-style:solid;
+				border-width: 0 0 1px 0;
+			}
+			.tcenter{
+				text-align: center;
+			}
+			
+			.mui-bar-nav~.mui-content{
+				padding-top: 46px;
+			}
+			.num, .stopLoss, .stopProfit{
+				display: flex;
+		
+			}
+			.text{
+				flex: 4;
+				line-height: 40px;
+				text-align: center;
+			}
+			.tradNum, .proftNum, .lossNum{
+				flex: 6;
+			}
+			.mui-slider .mui-segmented-control.mui-segmented-control-inverted~.mui-slider-group .mui-slider-item{
+				border-bottom: none;
+			}
+			.stop{
+				display: flex;
+				margin-top: 10px;
+			}
+			.stop>div{
+				flex: 1;
+				text-align: center;
+			}
+			.mui-numbox{
+				z-index: 999;
+			}
+			.tradNum, .lossNum, .proftNum {
+				display: flex!important;
+			}
+			#tradingNum, #upNum, #downNum{
+				text-align: center;
+			}
+			.mui-numbox{
+				padding: 0;
+			}
+			#goUp, #goDown{
+				z-index: 99999999;
+			}
+			button{
+				height: 40px;
+			}
+		</style>
+	</head>
+		
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">欧元/美元</h1>
+		</header>
+		<div class = "mui-content" >
+					<div id="slider" class="mui-slider mui-fullscreen clearfix"  >
+
+						<div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+							<div class="mui-scroll">
+								<a class="mui-control-item mui-active" href="#item1mobile">
+									1分
+								</a>
+								<a class="mui-control-item" href="#item2mobile">
+									5分
+								</a>
+								<a class="mui-control-item" href="#item3mobile">
+									15分
+								</a>
+							</div>
+						</div>
+						<div class="mui-slider-group">
+							<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+								<div style = "width:100%;height:360px;" id = "Min01">
+									
+								</div>
+							</div>
+							<div id="item2mobile" class="mui-slider-item mui-control-content">
+								<div style = "width:100%;height:360px;" id = "Min05">
+									
+								</div>
+							</div>
+							<div id="item3mobile" class="mui-slider-item mui-control-content ">
+								<div style = "width:100%;height:360px;" id = "Min15">
+									
+								</div>
+							</div>
+						</div>
+					</div>
+		
+					<div class='num'>
+						<div class='text'>交易手数</div>
+						<div class=" tradNum"   style='z-index: 99999999;'>
+							<button id='downBtn' type="button">-</button>
+							<input id='tradingNum'  type="number" value='0.01' />
+							<button id='upBtn'  type="button">+</button>
+						</div>
+					</div>
+					
+					
+					
+					
+					<div class='stopProfit'>
+						<div class='text'>止盈点数</div>
+						<div class=" proftNum" data-numbox-step='1' data-numbox-min='1' data-numbox-max='99999'  style='z-index: 99999999;'>
+							<button id='upgobtndown' type="button">-</button>
+							<input id='upNum'  type="number" value='224' />
+							<button id='upgobtnup' type="button">+</button>
+						</div>
+					</div> 
+					<div class='stopLoss'>
+						<div class='text'>止损点数</div>
+						<div class="lossNum" style='z-index: 99999999;'>
+							<button id='downgobtndown' type="button">-</button>
+							<input id='downNum'  type="number" value='233' />
+							<button id='downgobtnup' type="button">+</button>
+						</div>
+					</div>
+					
+					
+					<div class="box">
+						<a id='goUp' class="price red">买涨</a>	
+						<a id='goDown' class="price green">买跌</a>
+					</div>
+					
+		</div>
+
+					
+
+		<script src="js/mui.min.js"></script>
+		<script src = "js/echarts.js"></script>
+		<script src='js/Class.js'></script>
+		<script src="js/bar.js"></script>
+		<script src='js/kbar.js'></script>
+		<script type="text/javascript">
+			var bar01 = new Bar(0,0,0,0);
+			var bar03 = new Bar(0,0,0,0);
+			var bar15 = new Bar(0,0,0,0)
+			mui.init()
+			mui.plusReady(function(){
+				init(bar01,minTime1, min01chart);
+				init(bar03,minTime5, min05chart);
+				init(bar15,minTime15, min15chart);
+				init2();
+			})
+			
+				document.getElementById('upBtn').addEventListener('tap',function(){
+					var tradVal = document.getElementById('tradingNum').value - 0;
+					tradVal += 0.01;
+					document.getElementById('tradingNum').value = tradVal.toFixed(2);
+				});
+				document.getElementById('downBtn').addEventListener('tap', function(){
+					var tradVal = document.getElementById('tradingNum').value - 0;
+					if(tradVal > 0.01) {
+						document.getElementById('downBtn').disabled = false;
+						tradVal -= 0.01;
+						document.getElementById('tradingNum').value = tradVal.toFixed(2);
+					}
+				});
+				document.getElementById('upgobtnup').addEventListener('tap', function(){
+					var value = document.getElementById('upNum').value - 0;
+					value += 1;
+					document.getElementById('upNum').value = value;
+				});
+				document.getElementById('upgobtndown').addEventListener('tap', function(){
+					var value = document.getElementById('upNum').value - 0;
+					if(value > 1){
+						value -= 1;
+						document.getElementById('upNum').value = value;	
+					}
+				});
+				document.getElementById('downgobtnup').addEventListener('tap', function(){
+					var value = document.getElementById('downNum').value - 0;
+					value += 1;
+					document.getElementById('downNum').value = value;
+				});
+				document.getElementById('downgobtndown').addEventListener('tap', function(){
+					var value = document.getElementById('downNum').value - 0;
+					if(value > 1){
+						value -= 1;
+						document.getElementById('downNum').value = value;	
+					}
+				});
+				
+				
+				var self = plus.webview.currentWebview();
+	  			var symbol = self.symbol;
+  			
+				document.getElementById('goUp').addEventListener('tap', function(){
+
+					var tradingNum = document.getElementById('tradingNum').value - 0;
+					var stopup = document.getElementById('upNum').value;
+					var stopdown = document.getElementById('downNum').value;
+					var time = new Date().getTime();
+					console.log(time);
+					var price = bar01.close;
+					var data = {'command':'sendorder', 'price': price,'symbol' : symbol, 'type': 1,'direct': 'buy', 'vol': tradingNum ,'stopup': stopup , 'stopdown': stopdown, 'slippage' : 0 , 'time' : time};
+					data = JSON.stringify(data);
+					tradesocket.send(data);
+					console.log(1);
+
+			});
+			
+				document.getElementById('goDown').addEventListener('tap', function(){
+					var tradingNum = document.getElementById('tradingNum').value - 0;
+					var stopup = document.getElementById('upNum').value;
+					var stopdown = document.getElementById('downNum').value;
+					var time = new Date().getTime();
+					console.log(time);
+					var price = bar01.close;
+					var data = {'command':'sendorder', 'price': price,'symbol' : symbol, 'type': 1,'direct': 'buy', 'vol': tradingNum ,'stopup': stopup , 'stopdown': stopdown, 'slippage' : 0 , 'time' : time};
+					data = JSON.stringify(data);
+					tradesocket.send(data);
+					console.log(1);
+			});
+				
+			
+			
+			
+				var tradesocket = null;
+				function init2(){
+					var host = "ws://192.168.1.41:8080/trade";
+					  try{   
+					    tradesocket = new WebSocket(host);  
+					    tradesocket.onopen = function(msg){ 
+					     	//socket.send(data);
+					    }; 
+					   
+					    tradesocket.onmessage = function(msg){ 
+					    	console.log(666);
+							var data = msg.data;
+							console.log(data);
+							data = JSON.parse(data);
+							if(data.orderstatus == 5) {
+								mui.openWindow({
+									url: "business.html",
+									id : 'business.html',
+									extras:{
+										orderid: data.orderid,
+										symbol : data.symbol,
+										price : data.matchprice,
+										vol : data.matchvol
+									}
+								})	
+							}
+							
+							console.log(2);
+							
+					     };  
+					    tradesocket.onclose = function(msg){console.log(1);};  
+					  }  
+					  catch(ex){ 
+					  	console.log(1); 
+					  }	
+				}
+								
+				
+				
+				
+				
+				
+				
+				
+				
+	
+	
+			
+			var min01 = document.getElementById("Min01");
+			var min01chart = echarts.init(min01);
+			
+			
+			var min05 = document.getElementById('Min05');
+			var min05chart = echarts.init(min05);
+			
+			var min15 = document.getElementById('Min15')
+			var min15chart= echarts.init(min15);
+		
+			
+	
+  			var minTime1 = 1;
+  			var minTime5 = 5;
+  			var minTime15 = 15
+  			
+  			
+
+  			console.log(symbol);
+  			
+			function init(_bar,mintime, minchart){ 
+				var bar = _bar;
+				var data = [];
+				var socket;
+	  			var xtime = [];
+	  			
+			  var host = "ws://192.168.1.41:8080/bar";  
+			  try{   
+			    socket = new WebSocket(host);  
+			    socket.onopen = function(msg){ 
+//			    	var data = "{'command':'change_symbol', 'symbol':'XAU'}"
+			    	var data = {'command' : 'change_symbol', 'symbol' : symbol};
+			    	data = JSON.stringify(data);
+			    	console.log(data);
+			    	socket.send(data);
+			    }; 
+//			    
+			    socket.onmessage = function(msg){ 
+				console.log(JSON.stringify(msg));
+
+//				if(msgData.flag == 2000){ 
+			    			var tickData = JSON.parse(msg.data);
+//			    			if(tickData.symbol == "JPY"){
+			    				bar.tick(tickData.bid,tickData.time*1000, mintime);
+			    				if(bar.flag){
+								data.push(bar.toArray());
+								xtime.push(bar.xtime);
+								}else{
+								  data.pop(); 
+								  data.push(bar.toArray());
+								 
+								}
+//			    			};
+
+							  		var CandlestickChartOption = setOption(xtime,data,bar.close);
+							        minchart.setOption(CandlestickChartOption);
+							        minchart.resize();
+//			    		} 
+			     };  
+			    socket.onclose = function(msg){console.log(1);};  
+			  }  
+			  catch(ex){ log(ex); }
+			};
+
+
+	
+		
+
+
+			
+			
+		</script>
+	</body>
+
+</html>

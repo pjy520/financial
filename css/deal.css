@@ -1,0 +1,54 @@
+.num{
+	margin-top: 400px;
+	text-align: center;
+	width: 80%;
+	margin: 400px auto 0;
+}
+
+.num > div{
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.stopProfit, .stopLoss{
+	text-align: center;
+	width: 80%;
+	margin: 10px auto 0;
+}
+
+.stopProfit > div, .stopLoss > div{
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.mui-numbox{
+	width: 260px;
+	height: 40px;
+
+}
+
+
+.price{
+	height: 40px;
+	width: 100px;
+	margin: 20px auto;
+	text-align: center;
+	line-height: 40px;
+	color: #FFFFFF;
+	/*background-color: #ED5552;*/
+	border-radius: 4px;
+	display: inline-block;
+}
+
+.red{
+	background-color: #ED5552;
+}
+
+.green{
+	background-color: #11C971;
+}
+
+
+.box{
+	text-align: center;
+}

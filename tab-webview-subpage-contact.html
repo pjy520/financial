@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="./css/mui.min.css">
+		<!--App自定义的css-->
+		<!--<link rel="stylesheet" type="text/css" href="../css/app.css" />-->
+		<style>
+			body{
+				background-color: #fff;
+				font-family: "微软雅黑";
+			}
+			/*li{
+				border:none!important;
+			}*/
+			.mui-table-view:after, .mui-table-view:before, .mui-content, .mui-table-view-cell:after{
+				background-color: #fff;
+			}
+
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active{
+				color: #000;
+			}
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item{
+				color: darkgray;
+			}
+			.mui-card .mui-control-content {
+				padding: 10px;
+			}
+			.mui-control-item{
+				font-size: 16px;
+			}
+			.mui-control-content {
+				height: 150px;
+			}
+			.mui-scroll-wrapper{
+				overflow: visible;
+			}
+			#segmentedControl{
+				padding: 0 100px;
+			}
+			.mui-bar-nav~.mui-content {
+				padding-top: 30px;
+			}
+			.fl{
+				float: left;
+			}
+			.fr{
+				float: right;
+			}
+			.profitLoss, .recharge, .account{
+				font-size: 14px;
+				margin-top: -5px;
+			}
+			.money, .account-money{
+				font-size: 26px;
+				margin: 16px 0 10px 0;
+			}
+			.fund{
+				font-size: 20px;
+				margin: 16px 0 10px 0;
+			}
+			.
+			.deposit{
+				display: flex;
+				flex-direction: column;
+				height: 120px;
+			}
+			.deposit> div > div{
+				display: inline-block;
+
+			}
+			.deposit > div{
+				display: flex;
+				flex: 1;
+			}
+			.deposit > div > div{
+				flex: 1;
+				text-align: center;
+			}
+			.usable, .used, .scale, .value, .handNum, .yield, .taotalRevenue{
+				font-size: 16px;
+				margin-bottom: 5px;
+			}
+			.text{
+				font-size: 12px;
+				color: darkgray;
+			}
+			.floatingA{
+				border-bottom: 1px solid #EDEDED;
+			}
+			#segmentedControl2 > a{
+				height: 50px;
+				line-height: 50px;
+			}
+			.box{
+				padding: 5px 0 0 0;
+			}
+			.mui-table-view-cell>a:not(.mui-btn){
+				padding: 2px 10px;
+			}
+			
+			
+			.tradeCate, .i-tradeCate{
+				font-size: 14px;
+			}
+			
+			.buyUp, .i-buyUp{
+				font-size: 12px;
+			    background: #FF5750;
+			    border-radius: 51px;
+			    color: #fff;
+			    display: inline-block;
+			    width: 36px;
+			    text-align: center;
+			}
+			
+			.buyDown, .i-buyDown{
+				font-size: 12px;
+			    background: forestgreen;
+			    border-radius: 51px;
+			    color: #fff;
+			    display: inline-block;
+			    width: 36px;
+			    text-align: center;
+			}
+			.data, .i-data{
+				font-size: 12px;
+			}
+			
+			.priceChange, .i-priceChange{
+				font-size: 12px;
+				color: gray;
+			}
+			.buyPrice, .i-buyPrice{
+				font-size: 12px;
+			    color: gray;
+			    display: flex;
+			    justify-content: space-between;
+			}
+			
+			.greenEarnings, .i-greenEarnings{
+				color: green;
+			}
+			.redEarnings, .i-redEarnings{
+				color: red;
+			}
+			.earnings, .i-earnings{
+				text-align: center;
+			    font-size: 12px;
+			    color: gray;
+			}
+			.unwindRecord, .i-unwindRecord{
+				border-bottom: 1px solid lightgray;
+			}
+			.trench{
+				font-size: 16px;
+			}
+			.date{
+				font-size: 12px;
+				color: darkgray;
+			}
+			.moneyRecord{
+				border-bottom: 1px solid lightgray;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="mui-content">
+			<div style="padding: 10px 10px;">
+				<div id="segmentedControl" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
+					<a class="mui-control-item mui-active" href="#item1">持仓</a>
+					<a class="mui-control-item" href="#item2">历史</a>
+				</div>
+			</div>
+			<div style='height:205px;'>
+				<div id="item1" class="mui-control-content mui-active">
+							<ul class="mui-table-view">
+								<li class="mui-table-view-cell floatingCase">
+									<a href="" class='floatingA'>
+							    		<div class="floating fl">
+											<div class='profitLoss'>浮动盈亏</div>
+											<div class='money'>$0.00</div>
+							    		</div>
+							    		<div class='cash fr'>
+											<div class='recharge'>充值/提现</div>			    			
+							    		</div>
+							   		</a>									
+								</li>
+								<li class="mui-table-view-cell box">
+									<div class='deposit'>
+										<div>
+											<div>
+												<div class='usable'>$199.78</div>
+												<div class='text'>可用保证金</div>
+											</div>
+											<div>
+												<div class='used'>$0.00</div>
+												<div class='text'>已用保证金</div>
+											</div>
+										</div>
+										<div>
+											<div>
+												<div class='scale'>--</div>
+												<div class='text'>保证金比例</div>
+											</div>
+											<div>
+												<div class='value'>$199.78</div>
+												<div class='text'>账户净值</div>
+											</div>
+										</div>	
+									</div>
+								</li>
+
+							</ul>	
+							<div style="margin-bottom: 10px; background: #F8F8F8; ">
+								<div id="segmentedControl2" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
+									<a class="mui-control-item mui-active" href="#item3">
+								全部订单
+							</a>
+									<a class="mui-control-item" href="#item4">
+								自主持仓
+							</a>
+									<a class="mui-control-item" href="#item5">
+								跟单
+							</a>
+								</div>
+							</div>
+							<div>
+								<div id="item3" class="mui-control-content mui-active">
+									<div id="scroll" class="mui-scroll-wrapper">
+										<div class="mui-scroll">
+											<ul class="mui-table-view cate" id='cate'>
+												<!--<li class="mui-table-view-cell i-unwindRecord">
+													<div>
+														<div>
+															<div>
+																<span class='i-tradeCate'>澳元美元 AUDUSD</span> <span class='i-buyUp'>买涨</span>	
+															</div>
+															<p class='i-data'>2017-5-17 15:36</p>	
+														</div>
+														<div>
+															<div class='fl'>
+																<div class='i-priceChange'>	
+																	<span>0.740921</span>
+																	<span>-></span>
+																	<span>0.74068</span>
+																</div>
+																<div class='i-buyPrice'>
+																	<span>买涨价</span>
+																	<span>买跌价</span>
+																</div>
+															</div>
+															<div class='fr'>
+																<div class='i-greenEarnings'>-$0.22</div>
+																<div class='i-earnings'>浮动盈亏</div>
+															</div>
+														</div>
+													</div>
+												</li>-->
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div id="item4" class="mui-control-content">
+									<ul class="mui-table-view">
+										<li class="mui-table-view-cell">
+											第二个选项卡子项-1
+										</li>
+									</ul>
+								</div>
+								<div id="item5" class="mui-control-content">
+									<ul class="mui-table-view">
+										<li class="mui-table-view-cell">
+											第三个选项卡子项-1
+										</li>
+									</ul>
+								</div>
+							</div>
+			
+				</div>
+				<div id="item2" class="mui-control-content">
+							<ul class="mui-table-view">
+								<li class="mui-table-view-cell floatingCase">
+									<a href="" class='floatingA'>
+							    		<div class="floating fl">
+											<div class='account'>交易账户</div>
+											<div class='account-money'>$0.00</div>
+							    		</div>
+
+							   		</a>									
+								</li>
+								<li class="mui-table-view-cell box">
+									<div class='deposit'>
+										<div>
+											<div>
+												<div class='handNum'>$199.78</div>
+												<div class='text'>交易手数</div>
+											</div>
+											<div>
+												<div class='yield'>$0.00</div>
+												<div class='text'>收益率</div>
+											</div>
+										</div>
+										<div>
+											<div>
+												<div class='taotalRevenue'>--</div>
+												<div class='text'>总收益</div>
+											</div>
+											<div>
+												<!--<div class='value'>$199.78</div>
+												<div class='text'>账户净值</div>-->
+											</div>
+										</div>	
+									</div>
+								</li>
+
+							</ul>	
+							<div style="margin-bottom: 10px; background: #F8F8F8; ">
+								<div id="segmentedControl2" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
+									<a class="mui-control-item mui-active" href="#item6">
+								平仓记录
+							</a>
+									<a class="mui-control-item" href="#item7">
+								分成记录
+							</a>
+									<a class="mui-control-item" href="#item8">
+								资金记录
+							</a>
+								</div>
+							</div>
+							<div>
+								<div id="item6" class="mui-control-content mui-active">
+											<ul class="mui-table-view">
+												<li class="mui-table-view-cell unwindRecord">
+													<div>
+														<div>
+															<div>
+																<span class='tradeCate'>澳元美元 AUDUSD</span> <span class='buyUp'>买涨</span>	
+															</div>
+															<p class='data'>2017-5-17 15:36</p>	
+														</div>
+														<div>
+															<div class='fl'>
+																<div class='priceChange'>	
+																	<span>0.740921</span>
+																	<span>-></span>
+																	<span>0.74068</span>
+																</div>
+																<div class='buyPrice'>
+																	<span>买涨价</span>
+																	<span>买跌价</span>
+																</div>
+															</div>
+															<div class='fr'>
+																<div class='greenEarnings'>-$0.22</div>
+																<div class='earnings'>收益</div>
+															</div>
+														</div>
+													</div>
+												</li>
+											</ul>
+								</div>
+								<div id="item7" class="mui-control-content">
+									<ul class="mui-table-view">
+										<li class="mui-table-view-cell">
+											2
+										</li>
+									</ul>
+								</div>
+								<div id="item8" class="mui-control-content">
+									<ul class="mui-table-view">
+										<li class="mui-table-view-cell moneyRecord">
+											<div>
+												<div class="fl">
+													<div class="trench">开户赠金</div>
+													<div class="date">2017-05-12 10:26</div>
+												</div>
+												<div class="fr">
+													<div class="fund">$200.00</div>
+												</div>
+											</div>
+										</li>
+									</ul>
+								</div>
+							</div>
+				</div>
+			</div>
+		</div>
+	
+		
+		
+		
+		
+		
+		<script src="./js/mui.min.js"></script>
+		<script src="js/template.js"></script>
+		<script type='text/html' id='order'>
+			{{each data as value i}}
+				<li class="mui-table-view-cell i-unwindRecord case">
+					<div>
+						<div>
+							<div>
+								<span class='i-tradeCate'>{{value.symbol}}</span> <span class='i-buyUp'>买涨</span>	
+							</div>
+							<p class='i-data'>{{value.time}}</p>	
+						</div>
+						<div>
+							<div class='fl'>
+								<div class='i-priceChange'>	
+									<span>{{value.price}}</span>
+									<span>-></span>
+									<span>0.74068</span>
+								</div>
+								<div class='i-buyPrice'>
+									<span>买涨价</span>
+									<span>买跌价</span>
+								</div>
+							</div>
+							<div class='fr'>
+								<div class='i-greenEarnings'>-$0.22</div>
+								<div class='i-earnings'>浮动盈亏</div>
+							</div>
+						</div>
+					</div>
+				</li>
+			{{/each}}
+		</script>
+		<script>
+			var tradesocket = null;
+			mui.init({
+				swipeBack: true //启用右滑关闭功能
+			});
+			mui.plusReady(function(){				
+				init2();				
+		});
+			
+
+				function init2(){
+					var host = "ws://192.168.1.41:8080/trade";
+					  try{   
+					    tradesocket = new WebSocket(host);  
+					    tradesocket.onopen = function(msg){ 
+							tradesocket.send("{'command':'hold'}");
+					    }; 
+					   
+					    tradesocket.onmessage = function(msg){ 
+							var data = msg.data;	
+							data = JSON.parse(data);
+							if(data.command == 'hold') {
+								console.log(JSON.stringify(data));
+								var html = template('order', data);
+								document.getElementById('cate').innerHTML = html;
+								mui('.case').each(function(i,v){
+									console.log(1);
+									v.addEventListener('tap', function(){
+										mui.openWindow({
+											url: 'orderPage.html',
+											id : 'orderPage.html'
+										});
+									})
+								});
+							}
+								
+							console.log(2);
+							
+					     };  
+					    tradesocket.onclose = function(msg){console.log(1);};  
+					  }  
+					  catch(ex){ 
+					  	console.log(1); 
+					  }	
+				}
+		</script>
+
+	</body>
+
+</html>

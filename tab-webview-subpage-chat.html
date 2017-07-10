@@ -1,0 +1,328 @@
+
+
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<style>
+			html,
+			body {
+				background-color: #efeff4;
+			}
+			.mui-plus.mui-android header.mui-bar{
+				display: none;
+			}
+			.mui-plus.mui-android .mui-bar-nav~.mui-content{
+				padding: 0;
+			}
+			.fl{
+				float: left;
+			}
+			.fr{
+				float: right;
+			}
+			
+			.head{
+				width: 100%;
+				height: 40px;
+				background-color: #F4F4F4;
+				color: #8C8C8C;
+				font: 600 16px/40px "微软雅黑";
+			}
+			
+			
+			.breed, ._breed{
+				width: 50%;
+				text-align: left;
+				padding-left: 10px;
+			}
+			.risePrice, ._risePrice, .fallPrice, ._fallPrice{
+				width: 25%;
+				text-align: center;
+			}
+			
+			.red{
+				background-color: #ED5552;
+			}
+			
+			.green{
+				background-color: #11C971;
+			}
+			
+			
+			.price{
+				height: 30px;
+				width: 80px;
+				margin: 0 auto;
+				text-align: center;
+				line-height: 30px;
+				color: #FFFFFF;
+				border-radius: 4px;
+			}
+			
+			.eng{
+				color: #8E8E8E;
+				font-size: 14px;
+			}
+			.mui-table-view-cell.mui-active{
+				background-color: #fff;
+			}
+
+		
+			.optional > img{
+				padding-top: 5px;
+			}
+			#add{
+				z-index: 99;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <h1 class="mui-title">自选</h1>
+		    <a id='add' class='optional fr'> 
+		    	<img src="images/add.png" alt="" />
+		    </a>
+		</header>
+		<div class="mui-content">
+		    <div class='head'>
+		    	<div class="breed fl">交易品种名称</div>
+		    	<div class='risePrice fr'>买涨价</div>
+		    	<div class='fallPrice fr'>买跌价</div>
+		    </div>
+		    
+		    <div class="content" id='content'>
+		    	<ul class="mui-table-view" id='OA_task_1'>
+					<!--<li class="mui-table-view-cell cate">
+						<div class="mui-slider-right mui-disabled">
+							<a class="mui-btn mui-btn-red">删除</a>
+						</div>
+						<div class="mui-slider-handle">
+							<div class="_breed fl">
+								<div>欧元美元</div>
+							<div class="eng">EURJPY</div>
+							</div>
+							<div class="_risePrice fr">
+								<div class="price green">10245</div>
+							</div>
+							<div class="_fallPrice fr">
+								<div class="price red">1024.1024</div>
+							</div>
+						</div>
+					</li>-->
+				</ul>
+		    </div>
+		    
+		<script src="js/mui.min.js"></script>
+		<script src="js/template.js"></script>
+		<script src="js/config.js"></script>
+		<script type='text/html' id='optional'>
+			{{each optiones as value i}}
+				<li class="mui-table-view-cell cate">
+					<div class="mui-slider-right mui-disabled">
+						<a class="mui-btn mui-btn-red del" >删除</a>
+					</div>
+					<div class="mui-slider-handle" id='{{value.symbol}}'>
+						<div class="_breed fl">
+							<div>{{value.name}}</div>
+							<div class="eng">{{value.symbol}}</div>
+						</div>
+						<div class="_risePrice fr" >
+							<div class="price green"></div>
+						</div>
+						<div class="_fallPrice fr">
+							<div class="price red"></div>
+						</div>
+					</div>
+				</li>
+			{{/each}}
+		</script>
+		<script>
+			
+			mui.init();
+			
+			
+			mui.plusReady( function(){
+				
+				document.getElementById('add').addEventListener('tap', function(){
+					mui.openWindow({
+						url: 'tradeCategoryl.html',
+						id : 'tradeCategoryl.html'
+					})
+				});
+				
+				
+				
+				mui('.del').each(function(i,v){
+					v.addEventListener('tap', function(){
+						var symbol = this.parentNode.nextSibling.id;
+						mui.ajax(symbols_url,{
+							data:{
+								symbol: symbol,
+								option: 0	
+							},
+							dataType: 'json',
+							type: 'post',
+							success:function(data){
+								if(data.code == 2000) {
+									mui.toast(data.msg)
+								}
+							}
+						})
+					})
+				})
+				
+		
+				mui.ajax(mySymbols_url, {
+					type : 'get',
+					dataType : 'json',
+					success: function(data){
+						console.log(JSON.stringify(data));
+						var data = data.data;
+						var options = data.optiones;
+						var opt = [];
+						options.forEach(function(v, i){
+							opt.push(v.symbol);
+						})
+						console.log(JSON.stringify(opt));
+						
+						opt = opt.join().replace(/USD/g,'').split(',');
+						var json = "{'command':'my_option','options':"+ JSON.stringify(opt) +"}";
+						console.log(json);
+						init();
+						
+						
+						
+							var socket;
+	  
+							function init(){ 
+							  var host = "ws://192.168.1.41:8080/market";  
+							  try{  
+							    socket = new WebSocket(host);  
+							    socket.onopen  = function(msg){ 
+							    	socket.send(json);
+							    };
+							    socket.onmessage = function(msg){ 
+									var data = msg.data;
+									data = JSON.parse(data);
+									var kinds = document.getElementsByClassName('eng');
+									for(var i = 0; i < kinds.length; i++ ) {
+										var kind = kinds[i];
+										var html = kind.innerHTML.replace('USD','');
+										if( data.symbol == html ) {
+											var dom = document.getElementById(kind.innerHTML);
+											dom.querySelector(".red").innerHTML = data.ask;
+											dom.querySelector(".green").innerHTML = data.bid;
+										};
+									};
+							     };  
+							    socket.onclose   = function(msg){ console.log(1); };  
+							  }  
+							  catch(ex){ log(ex); }  
+							}  
+						var html = template('optional', data);
+						document.getElementById('OA_task_1').innerHTML = html;
+						
+						mui('.cate').each(function(i, v){
+							console.log(v);
+							var symbol = v.children[1].id;
+							console.log(symbol);
+							symbol = symbol.replace(/USD/,'');
+							console.log(symbol);
+							
+							v.addEventListener('tap', function(){
+								mui.openWindow({
+									url: 'deal.html',
+									id : 'deal.html',
+									extras: {
+										symbol: symbol
+									}
+								})
+							})
+						});
+				
+						
+						
+						
+					}
+	
+				});
+				
+				console.log(99)
+				console.log(mui('.cate'));
+
+//				
+//				document.getElementsByClassName('cate').forEach(function(v,i){
+//					console.log(v);
+//				})
+	  
+				
+				
+		
+				(function($) {
+					$('#OA_task_1').on('tap', '.mui-btn', function(event) {
+						var elem = this;
+						var li = elem.parentNode.parentNode;
+						mui.confirm('确认删除该条记录？', 'Hello MUI', btnArray, function(e) {
+							if (e.index == 0) {
+								li.parentNode.removeChild(li);
+							} else {
+								setTimeout(function() {
+									$.swipeoutClose(li);
+								}, 0);
+							}
+						});
+					});
+					var btnArray = ['确认', '取消'];
+				})(mui);
+				
+				
+			})
+			
+			
+			
+
+			
+			
+			
+			
+			
+//			mui.init({
+//				swipeBack: false,
+//				pullRefresh: {
+//					container: '#pullrefresh',
+//					down: {
+//						callback: pulldownRefresh
+//					},
+//					up: {
+//						contentrefresh: '正在加载...',
+//						callback: pullupRefresh
+//					}
+//				}
+//			});
+//			mui.plusReady(function(){
+//				init();
+//
+//
+//				
+
+//				
+//
+//			});
+//			
+	
+			
+
+		
+			
+			
+		</script>
+	</body>
+</html>
